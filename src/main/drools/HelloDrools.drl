@@ -1,0 +1,23 @@
+package org.nationwide.drools.object
+
+import org.nationwide.fields.FieldAccess;
+
+rule "Add rules for admin"
+when
+	$p :Person($city : city)
+	$c :City( name == "Des Moines") from $p.getCity()
+	$fieldAccess : FieldAccess()
+then
+	$fieldAccess.setAccessToAll(true);
+end	
+
+rule "Add rules for developer"
+when
+	$p :Person($city : city)
+	$c :City( name == "West Des Moines") from $p.getCity()
+	$fieldAccess : FieldAccess()
+then
+	$fieldAccess.addWritableFields("field 1");
+	$fieldAccess.addWritableFields("field 2");
+	$fieldAccess.addWritableFields("field 3");
+end	
